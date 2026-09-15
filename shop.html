@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop — Read Aloud Club</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Archivo+Black&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --ink:#0A0A0A; --ink-soft:#666; --paper:#FAFAF8; --gold:#D4AF37; --line:#ddd; }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.55;font-size:16px;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:640px;margin:0 auto;padding:0 24px;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;}
+  a{color:inherit;text-decoration:none;}
+  h1,h2,h3{margin:0;font-family:'Archivo Black';}
+
+  nav{position:sticky;top:0;background:rgba(250,250,248,0.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:50;padding:18px 0;}
+  .nav-inner{max-width:640px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;}
+  .wordmark{font-family:'Titan One';font-size:0.95rem;color:var(--ink);}
+  .nav-links{display:none;gap:22px;font-size:0.84rem;font-weight:700;}
+  .nav-links a.active,.nav-links a:hover{color:var(--gold);}
+  .menu-btn{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;border:2px solid var(--ink);background:var(--paper);cursor:pointer;}
+  .menu-btn svg{width:16px;height:16px;}
+  .mobile-menu{display:none;flex-direction:column;padding:10px 24px 18px;border-bottom:1px solid var(--line);background:var(--paper);}
+  .mobile-menu.open{display:flex;}
+  .mobile-menu a{padding:12px 4px;font-weight:700;font-size:0.98rem;border-bottom:1px solid var(--line);}
+  .mobile-menu a:last-child{border-bottom:none;}
+  @media (min-width:700px){ .menu-btn{display:none;} .mobile-menu{display:none !important;} .nav-links{display:flex;} }
+
+  .page-head{padding:44px 0 8px;}
+  .page-head h1{font-size:clamp(1.8rem,5vw,2.3rem);}
+  .page-head p{color:var(--ink-soft);font-size:1.02rem;margin-top:14px;max-width:52ch;}
+
+  section{padding:40px 0;}
+  .section-head h2{font-size:1.3rem;}
+  .section-head p{color:var(--ink-soft);font-size:0.94rem;margin-top:8px;}
+
+  /* FEATURED PRODUCT — the weekly challenge plan */
+  .featured{background:var(--ink);color:var(--paper);padding:36px 24px;margin:0 -24px;}
+  .featured .eyebrow{color:var(--gold);}
+  .featured h2{color:var(--paper);font-size:1.5rem;margin-top:10px;}
+  .featured p{color:#ccc;margin-top:12px;font-size:0.98rem;max-width:50ch;}
+  .featured .price{font-family:'Archivo Black';color:var(--gold);font-size:1.2rem;margin-top:16px;display:block;}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:15px 28px;border-radius:100px;font-weight:700;font-size:0.96rem;min-height:50px;background:var(--gold);color:var(--ink);margin-top:18px;}
+  .btn-arrow{transition:transform .15s ease;}
+  .btn:hover .btn-arrow{transform:translateX(3px);}
+
+  /* PRODUCT ROWS */
+  .product-list{display:flex;flex-direction:column;}
+  .product-row{display:block;padding:22px 0;border-bottom:1px solid var(--line);}
+  .product-list .product-row:first-child{border-top:1px solid var(--line);}
+  .product-row-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;}
+  .product-row h3{font-size:1.05rem;}
+  .product-row .avail{font-family:'IBM Plex Mono';font-size:0.66rem;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;color:var(--ink-soft);}
+  .product-row p{color:var(--ink-soft);font-size:0.9rem;margin-top:8px;max-width:56ch;}
+
+  /* BOOK RECS */
+  .book-list{display:flex;flex-direction:column;}
+  .book-row{display:block;padding:20px 0;border-bottom:1px solid var(--line);}
+  .book-list .book-row:first-child{border-top:1px solid var(--line);}
+  .book-row-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;}
+  .book-row h3{font-size:1rem;}
+  .book-row p{color:var(--ink-soft);font-size:0.88rem;margin-top:6px;}
+  .book-row .buy-link{font-family:'IBM Plex Mono';font-size:0.7rem;font-weight:700;color:var(--ink);text-decoration:underline;text-decoration-color:var(--gold);text-underline-offset:3px;white-space:nowrap;}
+  .affiliate-note{font-size:0.78rem;color:var(--ink-soft);margin-top:16px;font-style:italic;}
+
+  form{display:flex;flex-direction:column;gap:14px;margin-top:16px;}
+  label{font-size:0.82rem;font-weight:700;color:var(--ink-soft);}
+  input{width:100%;padding:13px 14px;border-radius:8px;border:2px solid var(--ink);font-family:'Inter';font-size:1rem;background:var(--paper);color:var(--ink);min-height:48px;}
+  input:focus{outline:none;border-color:var(--gold);}
+  .form-row{display:flex;flex-direction:column;gap:6px;}
+  .btn-form{background:var(--ink);color:var(--paper);border:none;cursor:pointer;}
+  .form-note-success{display:none;color:#2d7a4f;font-weight:700;font-size:0.9rem;margin-top:6px;}
+
+  footer{padding:32px 0;border-top:1px solid var(--line);font-size:0.85rem;color:var(--ink-soft);}
+  .footer-links{display:flex;gap:18px;flex-wrap:wrap;margin-top:12px;font-weight:600;color:var(--ink);}
+  .footer-bottom{margin-top:20px;font-size:0.78rem;color:var(--ink-soft);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="wordmark">READ ALOUD CLUB</a>
+    <div class="nav-links">
+      <a href="classes.html">Classes</a>
+      <a href="approach.html">Approach</a>
+      <a href="shop.html" class="active">Shop</a>
+      <a href="blog.html">Community</a>
+    </div>
+    <button class="menu-btn" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mmenu">
+    <a href="classes.html">Classes</a>
+    <a href="approach.html">Approach</a>
+    <a href="shop.html" class="active">Shop</a>
+    <a href="blog.html">Community</a>
+  </div>
+</nav>
+
+<header class="page-head wrap">
+  <p class="eyebrow">Shop</p>
+  <h1 style="margin-top:12px;">Bring the club home.</h1>
+  <p>The weekly community challenge plan, plus books I actually recommend for building confident young readers.</p>
+</header>
+
+<section style="padding:0;">
+  <div class="featured">
+    <div class="wrap" style="padding:0;">
+      <p class="eyebrow">Flagship product</p>
+      <h2>The Weekly Community Challenge Plan</h2>
+      <p>The exact structure I use in Read Aloud Club — a new, simple challenge every week to get your child reading aloud with someone in your community, or connecting with your own family. Builds relationships, connection and confidence, week after week.</p>
+      <span class="price">£19 · digital download</span>
+      <a href="#notify" class="btn">Get the plan <span class="btn-arrow">→</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="section-head">
+    <p class="eyebrow">More from the club</p>
+    <h2 style="margin-top:8px;">Digital courses.</h2>
+  </div>
+  <div class="product-list">
+    <a href="#notify" class="product-row">
+      <div class="product-row-top"><h3>Read Aloud Club, at Home</h3><span class="avail">Available soon</span></div>
+      <p>The same vocal games and reading practice from the in-person club, guided on video for families to do together.</p>
+    </a>
+    <a href="#notify" class="product-row">
+      <div class="product-row-top"><h3>Early Years Starter</h3><span class="avail">Coming soon</span></div>
+      <p>Gentle vocal play for the youngest children, guided for a parent to lead at home.</p>
+    </a>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="section-head">
+    <p class="eyebrow">Books I recommend</p>
+    <h2 style="margin-top:8px;">Great books for reading aloud.</h2>
+    <p>A growing list of books I actually use and recommend for building confident young readers.</p>
+  </div>
+  <div class="book-list">
+    <a href="#" class="book-row">
+      <div class="book-row-top"><h3>The Lion, the Witch and the Wardrobe</h3><span class="buy-link">Buy on Amazon →</span></div>
+      <p>The book behind our Narnia workshop — rich language, real drama, perfect for reading aloud in a group.</p>
+    </a>
+    <a href="#" class="book-row">
+      <div class="book-row-top"><h3>A collection of Shakespeare's Sonnets</h3><span class="buy-link">Buy on Amazon →</span></div>
+      <p>Short, rhythmic and surprisingly playful out loud — a great stretch for older readers.</p>
+    </a>
+    <a href="#" class="book-row">
+      <div class="book-row-top"><h3>My weekly reading newsletter</h3><span class="buy-link">Read on Substack →</span></div>
+      <p>Book picks, reading-aloud tips and updates from the club, straight to your inbox.</p>
+    </a>
+  </div>
+  <p class="affiliate-note">Some links above are affiliate links — I may earn a small commission at no extra cost to you.</p>
+</section>
+
+<section id="notify" class="wrap">
+  <div class="section-head">
+    <p class="eyebrow">Get notified</p>
+    <h2 style="margin-top:8px;">Be first to know when it's live.</h2>
+  </div>
+  <form onsubmit="event.preventDefault(); this.querySelector('.form-note-success').style.display='block';">
+    <div class="form-row"><label for="name">Name</label><input id="name" type="text" required></div>
+    <div class="form-row"><label for="email">Email</label><input id="email" type="email" required></div>
+    <button class="btn btn-form" type="submit">Notify me</button>
+    <p class="form-note-success">Thanks! This form is a preview — connect it to email or a mailing list tool to go live.</p>
+  </form>
+</section>
+
+<footer class="wrap" style="margin-top:40px;">
+  <a href="index.html" class="wordmark" style="font-size:0.85rem;">READ ALOUD CLUB</a>
+  <div class="footer-links">
+    <a href="classes.html">Classes</a>
+    <a href="approach.html">Approach</a>
+    <a href="blog.html">Community</a>
+  </div>
+  <p class="footer-bottom">Read Aloud Club — helping children connect with their voice, fearlessly.</p>
+</footer>
+
+</body>
+</html>

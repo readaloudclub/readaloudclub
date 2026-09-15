@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Approach — Read Aloud Club</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Archivo+Black&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --ink:#0A0A0A; --ink-soft:#666; --paper:#FAFAF8; --gold:#D4AF37; --line:#ddd; }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.6;font-size:16px;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:640px;margin:0 auto;padding:0 24px;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;}
+  a{color:inherit;text-decoration:none;}
+  h1,h2,h3{margin:0;font-family:'Archivo Black';}
+
+  nav{position:sticky;top:0;background:rgba(250,250,248,0.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:50;padding:18px 0;}
+  .nav-inner{max-width:640px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;}
+  .wordmark{font-family:'Titan One';font-size:0.95rem;color:var(--ink);}
+  .nav-links{display:none;gap:22px;font-size:0.84rem;font-weight:700;}
+  .nav-links a.active,.nav-links a:hover{color:var(--gold);}
+  .menu-btn{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;border:2px solid var(--ink);background:var(--paper);cursor:pointer;}
+  .menu-btn svg{width:16px;height:16px;}
+  .mobile-menu{display:none;flex-direction:column;padding:10px 24px 18px;border-bottom:1px solid var(--line);background:var(--paper);}
+  .mobile-menu.open{display:flex;}
+  .mobile-menu a{padding:12px 4px;font-weight:700;font-size:0.98rem;border-bottom:1px solid var(--line);}
+  .mobile-menu a:last-child{border-bottom:none;}
+  @media (min-width:700px){ .menu-btn{display:none;} .mobile-menu{display:none !important;} .nav-links{display:flex;} }
+
+  .page-head{padding:44px 0 8px;}
+  .page-head h1{font-size:clamp(1.8rem,5vw,2.3rem);line-height:1.2;}
+  .page-head p{color:var(--ink-soft);font-size:1.02rem;margin-top:22px;max-width:54ch;}
+  .page-head p strong{color:var(--ink);font-weight:700;}
+  .hero-quote{border-left:3px solid var(--gold);padding-left:16px;font-size:1.1rem;color:var(--ink);font-style:italic;}
+  .hero-quote strong{font-style:normal;}
+  .hero-close{font-size:1.1rem;color:var(--ink);font-weight:600;}
+
+  section{padding:40px 0;}
+  .section-head h2{font-size:1.4rem;}
+  .section-head p{color:var(--ink-soft);font-size:0.94rem;margin-top:8px;}
+
+  /* Numbered flowing list — used for both "what makes this different" and pillars */
+  .num-list{display:flex;flex-direction:column;}
+  .num-line{display:flex;gap:20px;padding:22px 0;border-bottom:2px solid var(--ink);align-items:baseline;}
+  .num-list .num-line:first-child{border-top:2px solid var(--ink);}
+  .num-line .pnum{font-family:'Archivo Black';font-size:2rem;color:var(--gold);-webkit-text-stroke:1.5px var(--ink);width:52px;flex-shrink:0;}
+  .num-line h3{font-size:1.1rem;}
+  .num-line p{font-size:0.9rem;color:var(--ink-soft);margin-top:4px;}
+
+  .community{background:var(--ink);color:var(--paper);padding:36px 24px;border-radius:18px;}
+  .community h2{color:var(--gold);font-size:1.4rem;}
+  .community p{color:#ccc;margin-top:12px;font-size:0.96rem;max-width:50ch;}
+  .community .btn{margin-top:20px;}
+
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:15px 28px;border-radius:100px;font-weight:700;font-size:0.96rem;min-height:50px;background:var(--gold);color:var(--ink);}
+  .btn-arrow{transition:transform .15s ease;}
+  .btn:hover .btn-arrow{transform:translateX(3px);}
+
+  footer{padding:32px 0;border-top:1px solid var(--line);font-size:0.85rem;color:var(--ink-soft);}
+  .footer-links{display:flex;gap:18px;flex-wrap:wrap;margin-top:12px;font-weight:600;color:var(--ink);}
+  .footer-bottom{margin-top:20px;font-size:0.78rem;color:var(--ink-soft);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="wordmark">READ ALOUD CLUB</a>
+    <div class="nav-links">
+      <a href="classes.html">Classes</a>
+      <a href="approach.html" class="active">Approach</a>
+      <a href="shop.html">Shop</a>
+      <a href="blog.html">Community</a>
+    </div>
+    <button class="menu-btn" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mmenu">
+    <a href="classes.html">Classes</a>
+    <a href="approach.html" class="active">Approach</a>
+    <a href="shop.html">Shop</a>
+    <a href="blog.html">Community</a>
+  </div>
+</nav>
+
+<header class="page-head wrap">
+  <p class="eyebrow">My approach</p>
+  <h1>Connect first. Then speak.</h1>
+  <p>My Meisner training taught me one thing above all: <strong>connection comes first</strong>. From there, I learned how to truly listen, read behaviour and trust my instincts — skills that help me to meet each child where they are.</p>
+  <p>Inspired by Meisner, I bring <strong>games</strong> into the classroom that encourage <strong>eye contact and real listening</strong> in a playful way — life skills that help us connect with another person or an audience.</p>
+  <p>I use games and challenges to distract the children whilst they read aloud, shifting their attention onto the task rather than themselves.</p>
+  <p class="hero-quote">That's the same principle behind Meisner's own words: "Acting is behaving truthfully under imaginary circumstances." <strong>Connection first, performance follows.</strong></p>
+  <p>Read Aloud Club sits between and supports both voice class and drama class — a space to explore their voice with real technique and real practice, building the connection skills that carry into both.</p>
+  <p class="hero-close">I spent my teens and twenties struggling to use my voice. Read Aloud Club is the space I wish I'd had — built with real intention, so children can practise using theirs.</p>
+  <p><a href="blog.html#post-3" style="text-decoration:underline;text-decoration-color:var(--gold);">Read all about the Meisner technique here →</a></p>
+</header>
+
+<section class="wrap">
+  <p class="eyebrow">What makes Read Aloud Club different?</p>
+  <div class="section-head" style="margin-top:8px;">
+    <h2>Three things, in practice.</h2>
+  </div>
+  <div class="num-list" style="margin-top:20px;">
+    <div class="num-line"><span class="pnum">01</span><div><h3>A real framework</h3><p>Connection, Confidence, Communication, Community — four pillars I can point to in every single session.</p></div></div>
+    <div class="num-line"><span class="pnum">02</span><div><h3>Beyond the classroom</h3><p>Every week, children take on a real challenge — reading aloud with someone in their community, or connecting with their own family.</p></div></div>
+    <div class="num-line"><span class="pnum">03</span><div><h3>A new theme, every course</h3><p>Every five-week course explores something different: poetry, jokes, Christmas stories, nature and more.</p></div></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <p class="eyebrow">What it's built on</p>
+  <div class="section-head" style="margin-top:8px;">
+    <h2>The four pillars.</h2>
+  </div>
+  <div class="num-list" style="margin-top:20px;">
+    <div class="num-line"><span class="pnum">01</span><div><h3>Connection</h3><p>Real connection — to a script, an audience or the person in front of them.</p></div></div>
+    <div class="num-line"><span class="pnum">02</span><div><h3>Confidence</h3><p>The quiet, inner confidence that's built slowly over time.</p></div></div>
+    <div class="num-line"><span class="pnum">03</span><div><h3>Communication</h3><p>Real, practical skills a child can use for life.</p></div></div>
+    <div class="num-line"><span class="pnum">04</span><div><h3>Community</h3><p>Reading aloud in the real world — a new place every week.</p></div></div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="community">
+    <p class="eyebrow" style="color:var(--gold);">At your child's own pace</p>
+    <h2>Never rushed.</h2>
+    <p>I meet every child exactly where they are and move forward with them at whatever pace feels right. I encourage growth only when they're ready for it. My approach builds a connected child with an inner confidence, through repetition of real technique and real practice.</p>
+    <a href="classes.html" class="btn">Explore the club <span class="btn-arrow">→</span></a>
+  </div>
+</section>
+
+<footer class="wrap" style="margin-top:40px;">
+  <a href="index.html" class="wordmark" style="font-size:0.85rem;">READ ALOUD CLUB</a>
+  <div class="footer-links">
+    <a href="classes.html">Classes</a>
+    <a href="shop.html">Shop</a>
+    <a href="blog.html">Community</a>
+  </div>
+  <p class="footer-bottom">Read Aloud Club — helping children connect with their voice, fearlessly.</p>
+</footer>
+
+</body>
+</html>
