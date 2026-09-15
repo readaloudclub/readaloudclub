@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Classes — Read Aloud Club</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Archivo+Black&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --ink:#0A0A0A; --ink-soft:#666; --paper:#FAFAF8; --gold:#D4AF37; --line:#ddd; }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.55;font-size:16px;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:640px;margin:0 auto;padding:0 24px;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;}
+  a{color:inherit;text-decoration:none;}
+  h1,h2,h3{margin:0;font-family:'Archivo Black';}
+
+  nav{position:sticky;top:0;background:rgba(250,250,248,0.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:50;padding:18px 0;}
+  .nav-inner{max-width:640px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;}
+  .wordmark{font-family:'Titan One';font-size:0.95rem;color:var(--ink);}
+  .nav-links{display:none;gap:22px;font-size:0.84rem;font-weight:700;}
+  .nav-links a.active,.nav-links a:hover{color:var(--gold);}
+  .menu-btn{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;border:2px solid var(--ink);background:var(--paper);cursor:pointer;}
+  .menu-btn svg{width:16px;height:16px;}
+  .mobile-menu{display:none;flex-direction:column;padding:10px 24px 18px;border-bottom:1px solid var(--line);background:var(--paper);}
+  .mobile-menu.open{display:flex;}
+  .mobile-menu a{padding:12px 4px;font-weight:700;font-size:0.98rem;border-bottom:1px solid var(--line);}
+  .mobile-menu a:last-child{border-bottom:none;}
+  @media (min-width:700px){ .menu-btn{display:none;} .mobile-menu{display:none !important;} .nav-links{display:flex;} }
+
+  .page-head{padding-top:44px;padding-bottom:8px;}
+  .page-head h1{font-size:clamp(1.8rem,5vw,2.3rem);}
+  .page-head p{color:var(--ink-soft);font-size:1.02rem;margin-top:14px;max-width:52ch;}
+
+  section{padding:44px 0;}
+  .section-head h2{font-size:1.4rem;}
+  .section-head p{color:var(--ink-soft);font-size:0.94rem;margin-top:8px;}
+
+  .tier-block{padding:34px 0;border-bottom:2px solid var(--ink);}
+  .tier-list-wrap .tier-block:first-child{border-top:2px solid var(--ink);}
+  .tier-head{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:10px;}
+  .tier-head h3{font-size:1.35rem;}
+  .tier-head .age{font-family:'IBM Plex Mono';font-weight:700;font-size:0.72rem;color:var(--gold);background:var(--ink);padding:6px 12px;border-radius:100px;white-space:nowrap;}
+  .tier-block .lede{color:var(--ink-soft);font-size:0.98rem;margin-top:12px;max-width:56ch;}
+  .tier-price{margin-top:18px;padding-top:16px;border-top:1px dashed var(--ink-soft);font-size:0.9rem;color:var(--ink-soft);}
+  .tier-price strong{color:var(--ink);font-family:'Archivo Black';font-size:1.05rem;}
+  .components{list-style:none;margin:18px 0 0;padding:0;display:flex;flex-direction:column;gap:8px;}
+  .components li{display:flex;gap:8px;font-size:0.9rem;}
+  .components li .dot{width:6px;height:6px;border-radius:50%;background:var(--gold);border:1px solid var(--ink);margin-top:8px;flex-shrink:0;}
+
+  .workshop-list{display:flex;flex-direction:column;gap:14px;}
+  .workshop-item{padding:20px;border:2px solid var(--ink);border-radius:14px;}
+  .workshop-item .tag{font-family:'IBM Plex Mono';font-size:0.62rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.04em;font-weight:700;}
+  .workshop-item h3{font-size:1.05rem;margin-top:6px;}
+  .workshop-item p{color:var(--ink-soft);font-size:0.9rem;margin-top:6px;}
+
+  .community{background:var(--ink);color:var(--paper);padding:36px 24px;border-radius:18px;}
+  .community h2{font-family:'Archivo Black';font-size:1.4rem;color:var(--gold);}
+  .community p{color:#ccc;margin-top:12px;font-size:0.96rem;max-width:50ch;}
+
+  .faq-list{display:flex;flex-direction:column;}
+  .faq-item{padding:20px 0;border-bottom:1px solid var(--line);}
+  .faq-list .faq-item:first-child{border-top:1px solid var(--line);}
+  .faq-item h3{font-size:1rem;}
+  .faq-item p{color:var(--ink-soft);font-size:0.9rem;margin-top:6px;}
+
+  form{display:flex;flex-direction:column;gap:14px;margin-top:16px;}
+  label{font-size:0.82rem;font-weight:700;color:var(--ink-soft);}
+  input,select{width:100%;padding:13px 14px;border-radius:8px;border:2px solid var(--ink);font-family:'Inter';font-size:1rem;background:var(--paper);color:var(--ink);min-height:48px;}
+  input:focus,select:focus{outline:none;border-color:var(--gold);}
+  .form-row{display:flex;flex-direction:column;gap:6px;}
+  .btn{display:inline-flex;align-items:center;gap:8px;padding:15px 28px;border-radius:100px;font-weight:700;font-size:0.96rem;min-height:50px;background:var(--ink);color:var(--paper);border:none;cursor:pointer;}
+  .form-note-success{display:none;color:#2d7a4f;font-weight:700;font-size:0.9rem;margin-top:6px;}
+
+  footer{padding:32px 0;border-top:1px solid var(--line);font-size:0.85rem;color:var(--ink-soft);}
+  .footer-links{display:flex;gap:18px;flex-wrap:wrap;margin-top:12px;font-weight:600;color:var(--ink);}
+  .review-grid{display:grid;grid-template-columns:1fr;gap:14px;margin-top:20px;}
+  @media (min-width:700px){ .review-grid{grid-template-columns:1fr 1fr 1fr;} }
+  .review-card{padding:20px;border:2px solid var(--ink);border-radius:14px;}
+  .review-card .stars{color:var(--gold);font-size:0.9rem;letter-spacing:2px;}
+  .review-card p.quote{margin-top:10px;font-size:0.92rem;color:var(--ink);}
+  .review-card p.reviewer{margin-top:12px;font-family:'IBM Plex Mono';font-size:0.72rem;color:var(--ink-soft);text-transform:uppercase;letter-spacing:0.03em;}
+  .footer-bottom{margin-top:20px;font-size:0.78rem;color:var(--ink-soft);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="wordmark">READ ALOUD CLUB</a>
+    <div class="nav-links">
+      <a href="classes.html" class="active">Classes</a>
+      <a href="approach.html">Approach</a>
+      <a href="shop.html">Shop</a>
+      <a href="blog.html">Community</a>
+    </div>
+    <button class="menu-btn" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mmenu">
+    <a href="classes.html" class="active">Classes</a>
+    <a href="approach.html">Approach</a>
+    <a href="shop.html">Shop</a>
+    <a href="blog.html">Community</a>
+  </div>
+</nav>
+
+<header class="page-head wrap">
+  <p class="eyebrow">Classes</p>
+  <h1 style="margin-top:12px;">One class. Three ages.</h1>
+  <p>Classes run in term time for home educators and in school holidays for everyone. You can join the full five-week course or try a single workshop first.</p>
+</header>
+
+<section class="wrap tier-list-wrap">
+
+  <div class="tier-block">
+    <div class="tier-head">
+      <h3>Read Aloud Club</h3>
+      <span class="age">AGES 4–6 · 45 MINS</span>
+    </div>
+    <p class="lede">Connection first, then play — building up to story, in their own voice.</p>
+    <ul class="components">
+      <li><span class="dot"></span>Connection games to build trust</li>
+      <li><span class="dot"></span>Vocal exercises to warm up their voice</li>
+      <li><span class="dot"></span>Playful vocal games and fun tongue twisters</li>
+      <li><span class="dot"></span>A story is read aloud and brought to life through play</li>
+    </ul>
+    <div class="tier-price"><strong>£50</strong> for the five-week course — includes a printed community challenge each week and a certificate for course completion.</div>
+  </div>
+
+  <div class="tier-block">
+    <div class="tier-head">
+      <h3>Read Aloud Club</h3>
+      <span class="age">AGES 6–10 · 1 HOUR</span>
+    </div>
+    <p class="lede">Connection first, then technique and vocal games — building up to reading aloud together.</p>
+    <ul class="components">
+      <li><span class="dot"></span>Connection game that builds trust</li>
+      <li><span class="dot"></span>Vocal warm up and vocal technique</li>
+      <li><span class="dot"></span>Articulation using fun tongue twisters</li>
+      <li><span class="dot"></span>Games that encourage eye contact and real listening</li>
+      <li><span class="dot"></span>Reading aloud together — as a group, in pairs and individually</li>
+    </ul>
+    <div class="tier-price"><strong>£50</strong> for the five-week course — includes a printed community challenge each week and a certificate for course completion.</div>
+  </div>
+
+  <div class="tier-block" style="border-bottom:none;">
+    <div class="tier-head">
+      <h3>Read Aloud Club</h3>
+      <span class="age">AGES 11–16 · 1 HOUR</span>
+    </div>
+    <p class="lede">The same foundations, pushed further — real connection, real technique and real reading aloud practice.</p>
+    <ul class="components">
+      <li><span class="dot"></span>Connection game that builds trust</li>
+      <li><span class="dot"></span>Vocal warm up and vocal technique</li>
+      <li><span class="dot"></span>Deeper listening and eye contact exercise</li>
+      <li><span class="dot"></span>Solo read aloud time with expressive delivery</li>
+    </ul>
+    <div class="tier-price"><strong>£50</strong> for the five-week course — includes a printed community challenge each week and a certificate for course completion.</div>
+  </div>
+
+</section>
+
+<section class="wrap">
+  <p class="eyebrow">One-off events</p>
+  <div class="section-head" style="margin-top:8px;">
+    <h2>Workshops.</h2>
+    <p>Themed one-off sessions — Read Aloud Club with a twist, built entirely around one story or writer.</p>
+  </div>
+  <div class="workshop-list" style="margin-top:16px;">
+    <div class="workshop-item">
+      <span class="tag">Themed event</span>
+      <h3>Shakespeare Workshop</h3>
+      <p>Read Aloud Club with a Shakespearean twist — every exercise, every game, every read aloud drawn from his plays and sonnets. For ages 11–16.</p>
+      <div class="tier-price"><strong>£30</strong> for a three-hour workshop.</div>
+    </div>
+    <div class="workshop-item">
+      <span class="tag">Themed event</span>
+      <h3>The Lion, the Witch and the Wardrobe</h3>
+      <p>Read Aloud Club with a Narnia twist — every exercise, every game, every read aloud drawn from The Lion, the Witch and the Wardrobe. For ages 6–10.</p>
+      <div class="tier-price"><strong>£30</strong> for a three-hour workshop.</div>
+    </div>
+    <div class="workshop-item">
+      <span class="tag" style="color:var(--gold);">Coming soon</span>
+      <h3>Read Aloud Club, Out and About</h3>
+      <p>A new event I'm working on — children reading aloud in real places around our community. Watch this space.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="community">
+    <p class="eyebrow" style="color:var(--gold);">Every age, every week</p>
+    <h2>Weekly community challenges.</h2>
+    <p>Alongside every class, I set children a weekly challenge — reading aloud with someone in their community, or connecting with their own family. It builds relationships, connection and confidence, week after week.</p>
+  </div>
+</section>
+
+<section class="wrap">
+  <p class="eyebrow">What parents say</p>
+  <h2 style="margin-top:8px;">Loved by families.</h2>
+  <div class="review-grid">
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="quote">"Placeholder review — swap in a real parent quote here about their child's confidence and voice."</p>
+      <p class="reviewer">Parent name, child aged 6</p>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="quote">"Placeholder review — swap in a real parent quote here about the games and connection skills."</p>
+      <p class="reviewer">Parent name, child aged 9</p>
+    </div>
+    <div class="review-card">
+      <div class="stars">★★★★★</div>
+      <p class="quote">"Placeholder review — swap in a real parent quote here about reading aloud with confidence."</p>
+      <p class="reviewer">Parent name, child aged 13</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <p class="eyebrow">FAQ</p>
+  <div class="section-head" style="margin-top:8px;">
+    <h2>A few common questions.</h2>
+  </div>
+  <div class="faq-list" style="margin-top:16px;">
+    <div class="faq-item">
+      <h3>Can my child join a different age group?</h3>
+      <p>I'm flexible on age — if your child would be more comfortable in a younger or older group, that's absolutely fine. Just let me know.</p>
+    </div>
+  </div>
+</section>
+
+<section id="book" class="wrap">
+  <div class="section-head">
+    <p class="eyebrow">Get a spot</p>
+    <h2 style="margin-top:8px;">Book a class.</h2>
+    <p>Tell me a little about your child and which age fits — I'll follow up with dates and details.</p>
+  </div>
+  <form onsubmit="event.preventDefault(); this.querySelector('.form-note-success').style.display='block';">
+    <div class="form-row"><label for="parent">Parent / guardian name</label><input id="parent" type="text" required></div>
+    <div class="form-row"><label for="child">Child's name &amp; age</label><input id="child" type="text" required></div>
+    <div class="form-row">
+      <label for="tier">Which age group?</label>
+      <select id="tier" required>
+        <option value="">Select an option</option>
+        <option>Read Aloud Club — Ages 4–6</option>
+        <option>Read Aloud Club — Ages 6–10</option>
+        <option>Read Aloud Club — Ages 11–16</option>
+        <option>Shakespeare Workshop</option>
+        <option>The Lion, the Witch and the Wardrobe Workshop</option>
+      </select>
+    </div>
+    <div class="form-row"><label for="email">Email</label><input id="email" type="email" required></div>
+    <div class="form-row"><label for="note">Anything else you'd like me to know? (optional)</label><textarea id="note" rows="4" style="width:100%;font-family:inherit;font-size:inherit;padding:10px;border:2px solid var(--ink);border-radius:8px;resize:vertical;"></textarea></div>
+    <button class="btn" type="submit">Request a spot</button>
+    <p class="form-note-success">Thanks! This form is a preview — connect it to email or a booking tool to go live.</p>
+  </form>
+</section>
+
+<footer class="wrap" style="margin-top:40px;">
+  <a href="index.html" class="wordmark" style="font-size:0.85rem;">READ ALOUD CLUB</a>
+  <div class="footer-links">
+    <a href="approach.html">Approach</a>
+    <a href="shop.html">Shop</a>
+    <a href="blog.html">Community</a>
+  </div>
+  <p class="footer-bottom">Read Aloud Club — helping children connect with their voice, fearlessly.</p>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Community — Read Aloud Club</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Titan+One&family=Archivo+Black&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{ --ink:#0A0A0A; --ink-soft:#666; --paper:#FAFAF8; --gold:#D4AF37; --line:#ddd; }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Inter',sans-serif;line-height:1.65;font-size:16px;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:640px;margin:0 auto;padding:0 24px;}
+  .eyebrow{font-family:'IBM Plex Mono',monospace;font-weight:700;font-size:0.68rem;letter-spacing:0.14em;text-transform:uppercase;}
+  a{color:inherit;text-decoration:none;}
+  h1,h2,h3{margin:0;font-family:'Archivo Black';}
+
+  nav{position:sticky;top:0;background:rgba(250,250,248,0.95);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:50;padding:18px 0;}
+  .nav-inner{max-width:640px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;}
+  .wordmark{font-family:'Titan One';font-size:0.95rem;color:var(--ink);}
+  .nav-links{display:none;gap:22px;font-size:0.84rem;font-weight:700;}
+  .nav-links a.active,.nav-links a:hover{color:var(--gold);}
+  .menu-btn{display:flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:8px;border:2px solid var(--ink);background:var(--paper);cursor:pointer;}
+  .menu-btn svg{width:16px;height:16px;}
+  .mobile-menu{display:none;flex-direction:column;padding:10px 24px 18px;border-bottom:1px solid var(--line);background:var(--paper);}
+  .mobile-menu.open{display:flex;}
+  .mobile-menu a{padding:12px 4px;font-weight:700;font-size:0.98rem;border-bottom:1px solid var(--line);}
+  .mobile-menu a:last-child{border-bottom:none;}
+  @media (min-width:700px){ .menu-btn{display:none;} .mobile-menu{display:none !important;} .nav-links{display:flex;} }
+
+  .page-head{padding-top:44px;padding-bottom:8px;}
+  .page-head h1{font-size:clamp(1.8rem,5vw,2.3rem);}
+  .page-head p{color:var(--ink-soft);font-size:1.02rem;margin-top:14px;max-width:52ch;}
+
+  section{padding:36px 0;}
+
+  .post-list{display:flex;flex-direction:column;}
+  .post-row{display:block;padding:22px 0;border-bottom:1px solid var(--line);}
+  .post-list .post-row:first-child{border-top:1px solid var(--line);}
+  .post-row .post-tag{font-family:'IBM Plex Mono';font-size:0.64rem;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;color:var(--ink-soft);}
+  .post-row h3{font-size:1.1rem;margin-top:8px;font-family:'Archivo Black';}
+  .post-row p{color:var(--ink-soft);font-size:0.9rem;margin-top:8px;}
+  .post-row .meta{font-family:'IBM Plex Mono';font-size:0.68rem;color:var(--ink-soft);margin-top:10px;display:block;}
+
+  article.full-post{padding:40px 0;border-top:2px solid var(--ink);}
+  .full-post .post-tag{font-family:'IBM Plex Mono';font-size:0.66rem;font-weight:700;text-transform:uppercase;letter-spacing:0.04em;color:var(--ink-soft);}
+  .full-post h1{font-size:clamp(1.5rem,4vw,2rem);margin-top:12px;}
+  .full-post .meta{color:var(--ink-soft);font-size:0.84rem;margin-top:10px;font-family:'IBM Plex Mono';}
+  .full-post .body p{color:var(--ink);font-size:1.02rem;margin-top:18px;}
+  .full-post .body h3{margin-top:28px;font-size:1.1rem;}
+  .full-post .pull{font-family:'Archivo Black';font-size:1.15rem;color:var(--ink);margin:24px 0;line-height:1.4;padding-left:16px;border-left:4px solid var(--gold);}
+  .back-link{display:inline-flex;align-items:center;gap:6px;font-size:0.86rem;font-weight:700;color:var(--ink-soft);margin-bottom:18px;}
+
+  footer{padding:32px 0;border-top:1px solid var(--line);font-size:0.85rem;color:var(--ink-soft);}
+  .footer-links{display:flex;gap:18px;flex-wrap:wrap;margin-top:12px;font-weight:600;color:var(--ink);}
+  .footer-bottom{margin-top:20px;font-size:0.78rem;color:var(--ink-soft);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="wordmark">READ ALOUD CLUB</a>
+    <div class="nav-links">
+      <a href="classes.html">Classes</a>
+      <a href="approach.html">Approach</a>
+      <a href="shop.html">Shop</a>
+      <a href="blog.html" class="active">Community</a>
+    </div>
+    <button class="menu-btn" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+  <div class="mobile-menu" id="mmenu">
+    <a href="classes.html">Classes</a>
+    <a href="approach.html">Approach</a>
+    <a href="shop.html">Shop</a>
+    <a href="blog.html" class="active">Community</a>
+  </div>
+</nav>
+
+<header class="page-head wrap">
+  <p class="eyebrow">Community</p>
+  <h1 style="margin-top:12px;">Notes on voice and reading aloud.</h1>
+  <p>Real exercises, honest thoughts and updates from the weekly community challenges. Follow along on social too — links in the footer.</p>
+</header>
+
+<section class="wrap">
+  <div class="post-list">
+    <a href="#post-1" class="post-row">
+      <span class="post-tag">Approach</span>
+      <h3>What the Meisner technique has to do with your child's confidence</h3>
+      <p>Meisner training isn't about memorising lines. It's about reacting truthfully to what's really in front of you.</p>
+      <span class="meta">Aug 28</span>
+    </a>
+    <a href="#post-2" class="post-row">
+      <span class="post-tag">Behind the scenes</span>
+      <h3>What I learned running my first Read Aloud Club</h3>
+      <p>Before it was a class with a name, it was seven Tuesday afternoons with a small group of children.</p>
+      <span class="meta">Aug 21</span>
+    </a>
+    <a href="#post-3" class="post-row">
+      <span class="post-tag">Who was Sanford Meisner?</span>
+      <h3>The man behind the technique</h3>
+      <p>Every class I teach is inspired by his name — here's who he actually was.</p>
+      <span class="meta">Aug 29</span>
+    </a>
+  </div>
+</section>
+
+<article id="post-1" class="full-post wrap">
+  <a href="#" class="back-link">← Back to Community</a>
+  <span class="post-tag">Approach</span>
+  <h1>What the Meisner technique has to do with your child's confidence</h1>
+  <p class="meta">Aug 28 · Sarah, Read Aloud Club</p>
+  <div class="body">
+    <p>When people hear I trained in Meisner technique, they often picture something theatrical. It's almost the opposite of that.</p>
+    <p>Meisner training comes down to one thing: reacting truthfully, in the moment, to what's actually in front of you. Not performing a feeling. Not saying a line the "right" way.</p>
+    <p class="pull">A child who's afraid to speak up usually isn't afraid of the words. They're afraid of being watched while they try.</p>
+    <p>That's the part most confidence-building programmes miss. Every class starts with games — not as a warm-up, but because they are the point. Play takes the pressure off, so a child can build real confidence without it feeling like a test.</p>
+  </div>
+</article>
+
+<article id="post-2" class="full-post wrap">
+  <a href="#" class="back-link">← Back to Community</a>
+  <span class="post-tag">Behind the scenes</span>
+  <h1>What I learned running my first Read Aloud Club</h1>
+  <p class="meta">Aug 21 · Sarah, Read Aloud Club</p>
+  <div class="body">
+    <p>Before Read Aloud Club had a name people had heard of, it was seven weeks, one hour at a time, with a small group of children.</p>
+    <p class="pull">The group reading was where it clicked. Nobody was reading alone anymore — but everybody still had to use their voice.</p>
+    <p>That pilot is the reason Read Aloud Club now runs as a proper weekly class, alongside a growing set of digital resources, so families can build these same skills together, wherever they are.</p>
+  </div>
+</article>
+
+<article id="post-3" class="full-post wrap">
+  <a href="#" class="back-link">← Back to Community</a>
+  <span class="post-tag">Approach</span>
+  <h1>Who was Sanford Meisner?</h1>
+  <p class="meta">Aug 29 · Sarah, Read Aloud Club</p>
+  <div class="body">
+    <p>Every class I teach is inspired by his name, so it feels right to actually tell you who he was.</p>
+    <p>Sanford Meisner (1905–1997) was an American actor and one of the most influential acting teachers of the twentieth century. He believed acting wasn't about performing emotion — it was about reacting truthfully to what's really happening between two people, right now.</p>
+    <p class="pull">He summed up his whole philosophy in one line: acting is "behaving truthfully under imaginary circumstances."</p>
+    <p>That's the exact idea Read Aloud Club is built on — just handed to children through play, instead of a rehearsal room.</p>
+  </div>
+</article>
+
+<footer class="wrap" style="margin-top:40px;">
+  <a href="index.html" class="wordmark" style="font-size:0.85rem;">READ ALOUD CLUB</a>
+  <div class="footer-links">
+    <a href="classes.html">Classes</a>
+    <a href="approach.html">Approach</a>
+    <a href="shop.html">Shop</a>
+  </div>
+  <p class="footer-bottom">Read Aloud Club — helping children connect with their voice, fearlessly.</p>
+</footer>
+
+</body>
+</html>
